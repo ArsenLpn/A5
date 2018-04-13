@@ -7,6 +7,8 @@
 #include <iomanip>
 #include <fstream>
 #include "json.hpp"
+#include <vector>
+
 
 using namespace std;
 using namespace nlohmann;
@@ -42,6 +44,7 @@ int main(int argc, char * argv[])
 	ifstream iFile(argv[3]);
 	ofstream oFile(argv[4]);
 
+
 	try{
 		if (!iFile.is_open())
 			throw "\niFile is unavailable";
@@ -55,8 +58,30 @@ int main(int argc, char * argv[])
 
 	json j;
 
-	iFile >> j;
-	oFile << setw(3) << j << '\n';
+	iFile >> j; // file parsed
+	oFile << setw(4) << "id" << setw(10) << "type" << setw(15)<< "name" << setw(15)<< "batter" << setw(18)<< "topping";
+
+	for(size_t i = 0; !j["items"]["item"][i].is_null();++i)
+	{//iterates through item
+
+
+
+
+		for(size_t k = 0; !j["items"]["item"][i]["batters"]["batter"][k].is_null();++k)
+		{//should iterate through batter
+
+			;/*write id , type , name */
+		}
+		for(size_t l = 0; !j["items"]["item"][i]["toppings"][l].is_null();++l){
+			;
+		}
+	}
+
+
+
+
+
+	//oFile << setw(3) << j << '\n';
 
 
 
