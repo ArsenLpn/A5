@@ -15,6 +15,7 @@
 using namespace std;
 using namespace nlohmann;
 
+//NOTES:
 //argv[0] is the exe file
 //argv[1] is -s 
 //argv[2] is the field by which we want to sort //
@@ -23,27 +24,18 @@ using namespace nlohmann;
 
 // very useful link
 //https://codereview.stackexchange.com/questions/167121/reading-and-storing-nested-data
-class stringComp
-{
-	public :
-		inline bool operator() (const string& s1, const string& s2)
-		{
-			return (!s1.compare(s2));
-		}
 
-};
+struct Data{																		//struct for extracted objects from .json
+	string id,type,name,batter,topping;												//variables from .json
 
-struct Data{
-	string id,type,name,batter,topping;
-
-	friend ostream& operator<<(ostream& out, Data& data)
+	friend ostream& operator<<(ostream& out, Data& data)							//stream operator overloading
 	{
 		out << setw(5) << data.id << setw(10) << data.type << setw(15) << data.name << setw(15) << data.batter << setw(30) << data.topping;
 		return out;
 	}
 
-	Data(string id = "null",string type = "null",string name = "null", string batter = "null",string topping = "null"){
-		this->id = id;
+	Data(string id = "null",string type = "null",string name = "null", string batter = "null",string topping = "null"){		//constructor for the container
+		this->id = id;																//fields of the container
 		this->name = name;
 		this->topping = topping;
 		this->type = type;
@@ -51,40 +43,39 @@ struct Data{
 	}
 };
 
-bool compareId(Data& d1, Data& d2){return d1.id<d2.id;}
-
-bool compareType(Data& d1, Data& d2){return d1.type<d2.type;}
-bool compareName(Data& d1, Data& d2){return d1.name<d2.name;}
-bool compareBatter(Data& d1, Data& d2){return d1.batter<d2.batter;}
-bool compareTopping(Data& d1, Data& d2){return d1.topping<d2.topping;}
+inline bool compareId(Data& d1, Data& d2){return d1.id<d2.id;}								//functors for sorting different field in data container
+inline bool compareType(Data& d1, Data& d2){return d1.type<d2.type;}							//using st::sort
+inline bool compareName(Data& d1, Data& d2){return d1.name<d2.name;}
+inline bool compareBatter(Data& d1, Data& d2){return d1.batter<d2.batter;}
+inline bool compareTopping(Data& d1, Data& d2){return d1.topping<d2.topping;}
 
 int main(int argc, char * argv[])
 {
 
-	cout<<"Argument entered: "<<argc<<'\n';
+	cout<<"Argument entered: "<<argc<<'\n';											//basic debug info
 
 	try{
-		if (argc < 5) {
+		if (argc < 5) {																//test for the proper amount of arguments
 			cout << "bad param!\n";
-			throw "No argument entered";
+			throw "No argument entered";												//break otherwise
 		}
 
-	}catch(string& str){
+	}catch(string& str){															//catch preious exception
 		cerr<<str;
-		exit(1);
+		exit(1);																		//exit
 	}
 
-	for(int i=0; i<argc;++i)
+	for(int i=0; i<argc;++i)														//list the used arguments
 		cout<<argv[i]<<'\n';
 
-	ifstream iFile(argv[3]);
+	ifstream iFile(argv[3]);														//open files
 	ofstream oFile(argv[4]);
 
-	vector<Data> data;
+	vector<Data> data;																//create vector of data containers
 
-	try{
+	try{																			//test opened files
 		if (!iFile.is_open())
-			throw "\niFile is unavailable";
+			throw "\niFile is unavailable";												//exception otherwise
 		if (!oFile.is_open())
 			throw "\noFIle is unavailable";
 	}
@@ -96,19 +87,19 @@ int main(int argc, char * argv[])
 	json j;
 
 	iFile >> j; // file parsed
-	oFile << setw(5) << "id" << setw(10) << "type" << setw(15)<< "name" << setw(15)<< "batter" << setw(30)<< "topping"<<'\n';
+	oFile << setw(5) << "id" << setw(10) << "type" << setw(15)<< "name" << setw(15)<< "batter" << setw(30)<< "topping"<<'\n';	//set the table headers
 
 
 
-	for(size_t i = 0; !j["items"]["item"][i].is_null();++i)
+	for(size_t i = 0; !j["items"]["item"][i].is_null();++i)									//start from the first element of 'item' and test if it exists
 	{//iterates through item
 
-		for(size_t k = 0; !j["items"]["item"][i]["batters"]["batter"][k].is_null();++k)
+		for(size_t k = 0; !j["items"]["item"][i]["batters"]["batter"][k].is_null();++k)		//iterate trough batter variations and
 		{//should iterate through batter
 
-			for(size_t l = 0; !j["items"]["item"][i]["topping"][l].is_null();++l)
+			for(size_t l = 0; !j["items"]["item"][i]["topping"][l].is_null();++l)				//for each variation in batter go trough toppings. => multiplying batter and topings
 			{
-				data.push_back(*new Data(
+				data.push_back(*new Data(														//create an object for each variation
 					j["items"]["item"][i]["id"].get<string>() +								//Unique id, combining all intermediate ids
 							j["items"]["item"][i]["batters"]["batter"][k]["id"].get<string>() +
 							j["items"]["item"][i]["topping"][l]["id"].get<string>(),
@@ -120,51 +111,32 @@ int main(int argc, char * argv[])
 			}
 		}
 	}
-	for(vector<Data>::iterator it = data.begin(); it != data.end(); ++it)
+	for(vector<Data>::iterator it = data.begin(); it != data.end(); ++it)					//debug info: unsorted data
 		cout << *it << '\n';
 	string temp = argv[2];
-	/*switch(temp)
-	{
-		case "type":
-			sort(data.begin(), data.end(), compareType);
-			break;
-		case "name":
-			sort(data.begin(), data.end(), compareName);
-			break;
-		case "batter":
-			sort(data.begin(), data.end(), compareBatter);
-			break;
-		case "topping":
-			sort(data.begin(), data.end(), compareTopping);
-			break;
 
-		case "id":
-		default:
-			sort(data.begin(), data.end(), compareTopping);
-			break;
-	}*/
-	if(!temp.compare("type")){
-		sort(data.begin(), data.end(), compareType);
+	if(!temp.compare("type")){																//sorting using stl
+		sort(data.begin(), data.end(), compareType);											//by type
 		cout<<1;
 	}
-	else if(!temp.compare("name")){
+	else if(!temp.compare("name")){																//by name
 		sort(data.begin(), data.end(), compareName);
 		cout<<"\n\n\n"<<"here"<<"\n\n\n";
 	}
-	else if(!temp.compare("batter")){
+	else if(!temp.compare("batter")){															//by batter
 		sort(data.begin(), data.end(), compareBatter);
 		cout<<3;
 	}
-	else if(!temp.compare("topping")){
+	else if(!temp.compare("topping")){															//by topping
 		sort(data.begin(), data.end(), compareTopping);
 		cout<<4;
 	}
-	else{
+	else{																						//default sort by id
 		sort(data.begin(), data.end(), compareId);
 		cout<<5;
 	}
 
-	for(vector<Data>::iterator it = data.begin(); it != data.end(); ++it)
+	for(vector<Data>::iterator it = data.begin(); it != data.end(); ++it)					//output result in to a file
 		oFile << *it << '\n';
 
 
@@ -175,12 +147,12 @@ int main(int argc, char * argv[])
 
 
 
-	iFile.close();
+	iFile.close();																			//close files
 	oFile.close();
 
-	cin.get();
+	cin.get();																				//hold the console
 
     // create JSON arrays
-	return 0;
+	return 0;																				//DONE!
 }
 
