@@ -110,10 +110,10 @@ int main(int argc, char * argv[])
 
 
 
-	//iFile.close();
-	//oFile.close();
+	iFile.close();
+	oFile.close();
 
-	//cin.get();
+	cin.get();
 
     // create JSON arrays
 	return 0;
