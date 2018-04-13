@@ -83,15 +83,20 @@ int main(int argc, char * argv[])
 	iFile >> j; // file parsed
 	oFile << setw(5) << "id" << setw(10) << "type" << setw(15)<< "name" << setw(15)<< "batter" << setw(18)<< "topping";
 
+	cout << j["items"]["item"][0]["id"].get<string>() + "a";
+
 	for(size_t i = 0; !j["items"]["item"][i].is_null();++i)
 	{//iterates through item
 
 		for(size_t k = 0; !j["items"]["item"][i]["batters"]["batter"][k].is_null();++k)
 		{//should iterate through batter
 
-			for(size_t l = 0; !j["items"]["item"][i]["toppings"][l].is_null();++l)
+			for(size_t l = 0; !j["items"]["item"][i]["topping"][l].is_null();++l)
 			{
-					string id = j["items"]["item"][1];
+				cout<<"here";
+					string id = j["items"]["item"][i]["id"].get<string>() +
+								j["items"]["item"][i]["batters"]["batter"][k]["id"].get<string>() +
+								j["items"]["item"][i]["topping"][l]["id"].get<string>();
 					cout << id <<'\n';
 				//data.push_back(*new Data());
 
