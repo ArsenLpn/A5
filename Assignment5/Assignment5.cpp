@@ -51,6 +51,12 @@ struct Data{
 	}
 };
 
+bool compareId(Data& d1, Data& d2){return d1.id<d2.id;}
+
+bool compareType(Data& d1, Data& d2){return d1.type<d2.type;}
+bool compareName(Data& d1, Data& d2){return d1.name<d2.name;}
+bool compareBatter(Data& d1, Data& d2){return d1.batter<d2.batter;}
+bool compareTopping(Data& d1, Data& d2){return d1.topping<d2.topping;}
 
 int main(int argc, char * argv[])
 {
@@ -106,7 +112,7 @@ int main(int argc, char * argv[])
 							j["items"]["item"][i]["topping"][l]["id"].get<string>(),
 					j["items"]["item"][i]["type"].get<string>(),							//cake type
 					j["items"]["item"][i]["name"].get<string>(),							//name
-					j["items"]["item"][i]["batters"]["batter"][k]["type"].get<string>(),	//butter type
+					j["items"]["item"][i]["batters"]["batter"][k]["type"].get<string>(),	//batter type
 					j["items"]["item"][i]["topping"][l]["type"].get<string>()				//topping
 					));
 			}
@@ -114,8 +120,50 @@ int main(int argc, char * argv[])
 	}
 	for(vector<Data>::iterator it = data.begin(); it != data.end(); ++it)
 		cout << *it << '\n';
-	sort(data.begin(), data.end());
+	string temp = argv[2];
+	/*switch(temp)
+	{
+		case "type":
+			sort(data.begin(), data.end(), compareType);
+			break;
+		case "name":
+			sort(data.begin(), data.end(), compareName);
+			break;
+		case "batter":
+			sort(data.begin(), data.end(), compareBatter);
+			break;
+		case "topping":
+			sort(data.begin(), data.end(), compareTopping);
+			break;
 
+		case "id":
+		default:
+			sort(data.begin(), data.end(), compareTopping);
+			break;
+	}*/
+	if(!temp.compare("type")){
+		sort(data.begin(), data.end(), compareType);
+		cout<<1;
+	}
+	else if(!temp.compare("name")){
+		sort(data.begin(), data.end(), compareName);
+		cout<<"\n\n\n"<<"here"<<"\n\n\n";
+	}
+	else if(!temp.compare("batter")){
+		sort(data.begin(), data.end(), compareBatter);
+		cout<<3;
+	}
+	else if(!temp.compare("topping")){
+		sort(data.begin(), data.end(), compareTopping);
+		cout<<4;
+	}
+	else{
+		sort(data.begin(), data.end(), compareId);
+		cout<<5;
+	}
+
+	for(vector<Data>::iterator it = data.begin(); it != data.end(); ++it)
+		oFile << *it << '\n';
 
 
 
