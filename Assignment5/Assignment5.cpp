@@ -1,7 +1,7 @@
 // Assignment5.cpp : Defines the entry point for the console application.
 //
 
-//#include "stdafx.h"
+#include "stdafx.h"
 
 
 #include <iostream>
@@ -64,8 +64,10 @@ int main(int argc, char * argv[])
 	cout<<"Argument entered: "<<argc<<'\n';
 
 	try{
-		if(argc==1)
+		if (argc < 5) {
+			cout << "bad param!\n";
 			throw "No argument entered";
+		}
 
 	}catch(string& str){
 		cerr<<str;
@@ -176,7 +178,7 @@ int main(int argc, char * argv[])
 	iFile.close();
 	oFile.close();
 
-	//cin.get();
+	cin.get();
 
     // create JSON arrays
 	return 0;

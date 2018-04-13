@@ -1,1 +1,84 @@
-  id      type           name           topping
+   id      type           name         batter                       topping
+000110035007    Pastry          Donut      Blueberry                         Maple
+000110035005    Pastry          Donut      Blueberry      Chocolate with Sprinkles
+000110035006    Pastry          Donut      Blueberry                     Chocolate
+000210035002      Cake            Pie      Blueberry                        Glazed
+000210035005      Cake            Pie      Blueberry                     Dog flesh
+000210035004      Cake            Pie      Blueberry                         Maple
+000210035003      Cake            Pie      Blueberry                     Chocolate
+000210035006      Cake            Pie      Blueberry      Chocolate with Sprinkles
+000210035007      Cake            Pie      Blueberry                Powdered Sugar
+000210035005      Cake            Pie      Blueberry                         Sugar
+000210035001      Cake            Pie      Blueberry                          None
+000210035008      Cake            Pie      Blueberry                Homeless Sweat
+000210035007      Cake            Pie      Blueberry                Squirrel brain
+000210035006      Cake            Pie      Blueberry                     Cat flesh
+000110035001    Pastry          Donut      Blueberry                          None
+000110035002    Pastry          Donut      Blueberry                        Glazed
+000110035003    Pastry          Donut      Blueberry                         Sugar
+000110035004    Pastry          Donut      Blueberry                Powdered Sugar
+000210025006      Cake            Pie      Chocolate                     Cat flesh
+000210025007      Cake            Pie      Chocolate                Squirrel brain
+000210025008      Cake            Pie      Chocolate                Homeless Sweat
+000210025001      Cake            Pie      Chocolate                          None
+000210025002      Cake            Pie      Chocolate                        Glazed
+000210025005      Cake            Pie      Chocolate                         Sugar
+000110025001    Pastry          Donut      Chocolate                          None
+000110025002    Pastry          Donut      Chocolate                        Glazed
+000110025003    Pastry          Donut      Chocolate                         Sugar
+000110025004    Pastry          Donut      Chocolate                Powdered Sugar
+000110025005    Pastry          Donut      Chocolate      Chocolate with Sprinkles
+000110025006    Pastry          Donut      Chocolate                     Chocolate
+000110025007    Pastry          Donut      Chocolate                         Maple
+000210025007      Cake            Pie      Chocolate                Powdered Sugar
+000210025006      Cake            Pie      Chocolate      Chocolate with Sprinkles
+000210025003      Cake            Pie      Chocolate                     Chocolate
+000210025004      Cake            Pie      Chocolate                         Maple
+000210025005      Cake            Pie      Chocolate                     Dog flesh
+000110045004    Pastry          Donut   Devil's Food                Powdered Sugar
+000110045002    Pastry          Donut   Devil's Food                        Glazed
+000110045003    Pastry          Donut   Devil's Food                         Sugar
+000210045007      Cake            Pie   Devil's Food                Powdered Sugar
+000110045005    Pastry          Donut   Devil's Food      Chocolate with Sprinkles
+000110045006    Pastry          Donut   Devil's Food                     Chocolate
+000110045007    Pastry          Donut   Devil's Food                         Maple
+000110045001    Pastry          Donut   Devil's Food                          None
+000210045001      Cake            Pie   Devil's Food                          None
+000210045002      Cake            Pie   Devil's Food                        Glazed
+000210045005      Cake            Pie   Devil's Food                         Sugar
+000210045006      Cake            Pie   Devil's Food      Chocolate with Sprinkles
+000210045003      Cake            Pie   Devil's Food                     Chocolate
+000210045004      Cake            Pie   Devil's Food                         Maple
+000210045005      Cake            Pie   Devil's Food                     Dog flesh
+000210045006      Cake            Pie   Devil's Food                     Cat flesh
+000210045007      Cake            Pie   Devil's Food                Squirrel brain
+000210045008      Cake            Pie   Devil's Food                Homeless Sweat
+000210015006      Cake            Pie        Regular                     Cat flesh
+000210015004      Cake            Pie        Regular                         Maple
+000210015003      Cake            Pie        Regular                     Chocolate
+000210015006      Cake            Pie        Regular      Chocolate with Sprinkles
+000210015005      Cake            Pie        Regular                         Sugar
+000210015005      Cake            Pie        Regular                     Dog flesh
+000210015001      Cake            Pie        Regular                          None
+000110015003    Pastry          Donut        Regular                         Sugar
+000110015004    Pastry          Donut        Regular                Powdered Sugar
+000110015005    Pastry          Donut        Regular      Chocolate with Sprinkles
+000210015002      Cake            Pie        Regular                        Glazed
+000110015006    Pastry          Donut        Regular                     Chocolate
+000110015002    Pastry          Donut        Regular                        Glazed
+000110015001    Pastry          Donut        Regular                          None
+000110015007    Pastry          Donut        Regular                         Maple
+000210015008      Cake            Pie        Regular                Homeless Sweat
+000210015007      Cake            Pie        Regular                Powdered Sugar
+000210015007      Cake            Pie        Regular                Squirrel brain
+000210055001      Cake            Pie   other batter                          None
+000210055002      Cake            Pie   other batter                        Glazed
+000210055005      Cake            Pie   other batter                         Sugar
+000210055007      Cake            Pie   other batter                Powdered Sugar
+000210055006      Cake            Pie   other batter      Chocolate with Sprinkles
+000210055003      Cake            Pie   other batter                     Chocolate
+000210055004      Cake            Pie   other batter                         Maple
+000210055005      Cake            Pie   other batter                     Dog flesh
+000210055006      Cake            Pie   other batter                     Cat flesh
+000210055007      Cake            Pie   other batter                Squirrel brain
+000210055008      Cake            Pie   other batter                Homeless Sweat
