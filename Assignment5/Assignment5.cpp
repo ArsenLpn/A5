@@ -22,6 +22,27 @@ using namespace nlohmann;
 
 // very useful link
 //https://codereview.stackexchange.com/questions/167121/reading-and-storing-nested-data
+class stringComp
+{
+	public :
+		inline bool operator() (const string& s1, const string& s2)
+		{
+			return (!s1.compare(s2));
+		}
+
+};
+
+struct Data{
+	string id,type,name,batter,topping;
+
+	Data(string id,string type,string name, string batter,string topping){
+		this->id = id;
+		this->name = name;
+		this->topping = topping;
+		this->type = type;
+		this->batter = batter;
+	}
+};
 
 
 int main(int argc, char * argv[])
@@ -30,7 +51,7 @@ int main(int argc, char * argv[])
 	cout<<"Argument entered: "<<argc<<'\n';
 
 	try{
-		if(!argc)
+		if(argc==1)
 			throw "No argument entered";
 
 	}catch(string& str){
@@ -44,6 +65,7 @@ int main(int argc, char * argv[])
 	ifstream iFile(argv[3]);
 	ofstream oFile(argv[4]);
 
+	vector<Data> data;
 
 	try{
 		if (!iFile.is_open())
@@ -59,24 +81,26 @@ int main(int argc, char * argv[])
 	json j;
 
 	iFile >> j; // file parsed
-	oFile << setw(4) << "id" << setw(10) << "type" << setw(15)<< "name" << setw(15)<< "batter" << setw(18)<< "topping";
+	oFile << setw(5) << "id" << setw(10) << "type" << setw(15)<< "name" << setw(15)<< "batter" << setw(18)<< "topping";
 
 	for(size_t i = 0; !j["items"]["item"][i].is_null();++i)
 	{//iterates through item
 
-
-
-
 		for(size_t k = 0; !j["items"]["item"][i]["batters"]["batter"][k].is_null();++k)
 		{//should iterate through batter
-			for(size_t l = 0; !j["items"]["item"][i]["toppings"][l].is_null();++l){
-						;
-					}
 
+			for(size_t l = 0; !j["items"]["item"][i]["toppings"][l].is_null();++l)
+			{
+					string id = j["items"]["item"][1];
+					cout << id <<'\n';
+				//data.push_back(*new Data());
+
+			}
 			;//write id , type , name
 		}
-		
+
 	}
+
 
 
 
@@ -89,7 +113,9 @@ int main(int argc, char * argv[])
 	//iFile.close();
 	//oFile.close();
 
-	cin.get();
+	//cin.get();
+
+    // create JSON arrays
 	return 0;
 }
 
