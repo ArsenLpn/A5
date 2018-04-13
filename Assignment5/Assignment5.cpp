@@ -1,7 +1,7 @@
 // Assignment5.cpp : Defines the entry point for the console application.
 //
 
-#include "stdafx.h"
+//#include "stdafx.h"
 
 
 #include <iostream>
@@ -9,6 +9,7 @@
 #include <fstream>
 #include "json.hpp"
 #include <vector>
+#include <algorithm>
 
 
 using namespace std;
@@ -37,7 +38,7 @@ struct Data{
 
 	friend ostream& operator<<(ostream& out, Data& data)
 	{
-		out << setw(5) << data.id << setw(10) << data.type << setw(15) << data.name << setw(15) << data.batter << setw(18) << data.topping;
+		out << setw(5) << data.id << setw(10) << data.type << setw(15) << data.name << setw(15) << data.batter << setw(30) << data.topping;
 		return out;
 	}
 
@@ -87,9 +88,9 @@ int main(int argc, char * argv[])
 	json j;
 
 	iFile >> j; // file parsed
-	oFile << setw(5) << "id" << setw(10) << "type" << setw(15)<< "name" << setw(15)<< "batter" << setw(18)<< "topping";
+	oFile << setw(5) << "id" << setw(10) << "type" << setw(15)<< "name" << setw(15)<< "batter" << setw(30)<< "topping"<<'\n';
 
-	cout << j["items"]["item"][0]["id"].get<string>() + "a";
+
 
 	for(size_t i = 0; !j["items"]["item"][i].is_null();++i)
 	{//iterates through item
@@ -99,13 +100,8 @@ int main(int argc, char * argv[])
 
 			for(size_t l = 0; !j["items"]["item"][i]["topping"][l].is_null();++l)
 			{
-				cout<<"here";
-					string id = j["items"]["item"][i]["id"].get<string>() +
-								j["items"]["item"][i]["batters"]["batter"][k]["id"].get<string>() +
-								j["items"]["item"][i]["topping"][l]["id"].get<string>();
-					cout << id <<'\n';
 				data.push_back(*new Data(
-					j["items"]["item"][i]["id"].get<string>() +								//Unique id
+					j["items"]["item"][i]["id"].get<string>() +								//Unique id, combining all intermediate ids
 							j["items"]["item"][i]["batters"]["batter"][k]["id"].get<string>() +
 							j["items"]["item"][i]["topping"][l]["id"].get<string>(),
 					j["items"]["item"][i]["type"].get<string>(),							//cake type
@@ -113,12 +109,12 @@ int main(int argc, char * argv[])
 					j["items"]["item"][i]["batters"]["batter"][k]["type"].get<string>(),	//butter type
 					j["items"]["item"][i]["topping"][l]["type"].get<string>()				//topping
 					));
-
 			}
-			;//write id , type , name
 		}
-
 	}
+	for(vector<Data>::iterator it = data.begin(); it != data.end(); ++it)
+		cout << *it << '\n';
+	sort(data.begin(), data.end());
 
 
 
