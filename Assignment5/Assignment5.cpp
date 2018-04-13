@@ -35,6 +35,12 @@ class stringComp
 struct Data{
 	string id,type,name,batter,topping;
 
+	friend ostream& operator<<(ostream& out, Data& data)
+	{
+		out << setw(5) << data.id << setw(10) << data.type << setw(15) << data.name << setw(15) << data.batter << setw(18) << data.topping;
+		return out;
+	}
+
 	Data(string id = "null",string type = "null",string name = "null", string batter = "null",string topping = "null"){
 		this->id = id;
 		this->name = name;
