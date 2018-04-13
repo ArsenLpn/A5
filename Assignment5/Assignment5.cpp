@@ -35,7 +35,7 @@ class stringComp
 struct Data{
 	string id,type,name,batter,topping;
 
-	Data(string id,string type,string name, string batter,string topping){
+	Data(string id = "null",string type = "null",string name = "null", string batter = "null",string topping = "null"){
 		this->id = id;
 		this->name = name;
 		this->topping = topping;
@@ -98,7 +98,15 @@ int main(int argc, char * argv[])
 								j["items"]["item"][i]["batters"]["batter"][k]["id"].get<string>() +
 								j["items"]["item"][i]["topping"][l]["id"].get<string>();
 					cout << id <<'\n';
-				//data.push_back(*new Data());
+				data.push_back(*new Data(
+					j["items"]["item"][i]["id"].get<string>() +								//Unique id
+							j["items"]["item"][i]["batters"]["batter"][k]["id"].get<string>() +
+							j["items"]["item"][i]["topping"][l]["id"].get<string>(),
+					j["items"]["item"][i]["type"].get<string>(),							//cake type
+					j["items"]["item"][i]["name"].get<string>(),							//name
+					j["items"]["item"][i]["batters"]["batter"][k]["type"].get<string>(),	//butter type
+					j["items"]["item"][i]["topping"][l]["type"].get<string>()				//topping
+					));
 
 			}
 			;//write id , type , name
@@ -118,7 +126,7 @@ int main(int argc, char * argv[])
 	iFile.close();
 	oFile.close();
 
-	cin.get();
+	//cin.get();
 
     // create JSON arrays
 	return 0;
